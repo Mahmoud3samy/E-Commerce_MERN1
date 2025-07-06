@@ -1,8 +1,14 @@
 import express from 'express';
-import { addItemToCart,checkout,clearCart,deleteItemIncart,getActiveCartForUser, updateItemInCart} from '../services/cartService';
+import {
+  addItemToCart,
+  checkout,
+  clearCart,
+  deleteItemIncart,
+  getActiveCartForUser,
+  updateItemInCart,
+} from '../services/cartService';
 import validateJWT from '../middlewares/validateJWT';
 import { ExtendRequest } from '../types/extendRequest';
-
 
 const router = express.Router();
 
@@ -12,7 +18,7 @@ router.get('/', validateJWT, async (req: ExtendRequest, res) => {
     const cart = await getActiveCartForUser({ userId });
     res.status(200).send(cart);
   } catch (err) {
-    res.status(500).send("Something went wrong!")
+    res.status(500).send('Something went wrong!');
   }
 });
 
@@ -46,20 +52,22 @@ router.put('/items', validateJWT, async (req: ExtendRequest, res) => {
   } catch (err) {
     res.status(500).send('Something went wrong!');
   }
-  
 });
-  
-router.delete("/items/:productId", validateJWT, async (req: ExtendRequest, res) => {
-  try {
-    const userId = req?.user?._id;
-    const { productId } = req.params;
-    const response = await deleteItemIncart({ userId, productId });
-    res.status(response.statusCode).send(response.data);
-  } catch (err) {
-    res.status(500).send('Something went wrong!');
+
+router.delete(
+  '/items/:productId',
+  validateJWT,
+  async (req: ExtendRequest, res) => {
+    try {
+      const userId = req?.user?._id;
+      const { productId } = req.params;
+      const response = await deleteItemIncart({ userId, productId });
+      res.status(response.statusCode).send(response.data);
+    } catch (err) {
+      res.status(500).send('Something went wrong!');
+    }
   }
-  
-})
+);
 
 router.post('/checkout', validateJWT, async (req: ExtendRequest, res) => {
   try {
@@ -70,6 +78,6 @@ router.post('/checkout', validateJWT, async (req: ExtendRequest, res) => {
   } catch (err) {
     res.status(500).send('Something went wrong!');
   }
-  });
+});
 
 export default router;
