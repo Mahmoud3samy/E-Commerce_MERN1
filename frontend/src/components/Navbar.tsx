@@ -16,7 +16,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
-  const { username, isAuthenticated } = useAuth();
+  const { username, isAuthenticated, logout } = useAuth();
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -33,6 +33,12 @@ function Navbar() {
 
   const handleLogin = () => {
     navigate('/login')
+  }
+
+  const handlelogout = () => {
+    logout();
+    navigate("/");
+    handleCloseUserMenu()
   }
 
   return (
@@ -114,7 +120,7 @@ function Navbar() {
                     My Orders
                   </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu}>
+                <MenuItem onClick={handlelogout}>
                   <Typography sx={{ textAlign: 'center' }}>
                     Logout
                   </Typography>
