@@ -8,7 +8,7 @@ import CartPage from './pages/CartPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import AuthProvider from './context/Auth/AuthProvider';
-import CartProvider from './context/cart/CartProvider';
+import CartProvider from './context/Cart/CartProvider';
 
 function App() {
   return (
