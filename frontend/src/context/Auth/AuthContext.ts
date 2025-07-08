@@ -8,7 +8,6 @@ interface AuthContextType {
   logout: () => void;
 }
 
-
 export const AuthContext = createContext<AuthContextType>({
   username: null,
   token: null,

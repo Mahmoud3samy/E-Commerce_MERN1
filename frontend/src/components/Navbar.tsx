@@ -11,11 +11,12 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
-import { useAuth } from '../context/Auth/AuthContext';
+
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
+import { useAuth } from '../context/Auth/AuthContext';
 
 function Navbar() {
   const { username, isAuthenticated, logout } = useAuth();
@@ -34,18 +35,18 @@ function Navbar() {
   };
 
   const handleLogin = () => {
-    navigate('/login')
-  }
+    navigate('/login');
+  };
 
   const handlelogout = () => {
     logout();
-    navigate("/");
-    handleCloseUserMenu()
-  }
+    navigate('/');
+    handleCloseUserMenu();
+  };
 
   const handleCart = () => {
-    navigate("/cart");
-  }
+    navigate('/cart');
+  };
 
   return (
     <AppBar position="static">

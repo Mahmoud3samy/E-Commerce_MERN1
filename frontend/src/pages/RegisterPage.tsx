@@ -5,11 +5,12 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useRef, useState } from 'react';
 import { BASE_URL } from '../constants/baseUrl';
-import { useAuth } from '../context/Auth/AuthContext';
+
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/Auth/AuthContext';
 
 const RegisterPage = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -26,11 +27,11 @@ const RegisterPage = () => {
     const password = passwordRef.current?.value;
 
     // Validate the from data
-    if(!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !email || !password) {
       setError('Check submitted data');
     }
 
-    if(!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !email || !password) {
       return;
     }
 
@@ -38,7 +39,7 @@ const RegisterPage = () => {
     const response = await fetch(`${BASE_URL}/user/register`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         firstName,
@@ -49,19 +50,18 @@ const RegisterPage = () => {
     });
 
     if (!response.ok) {
-      setError("Unable to register user, please try different credientials!");
+      setError('Unable to register user, please try different credientials!');
     }
 
     const token = await response.json();
 
-    if(!token) {
-      setError("Incorrect token")
+    if (!token) {
+      setError('Incorrect token');
       return;
     }
 
     login(email, token);
-    navigate("/");
-
+    navigate('/');
   };
 
   return (
@@ -92,11 +92,7 @@ const RegisterPage = () => {
             label="Full Name"
             name="fullName"
           />
-          <TextField
-            inputRef={lastNameRef}
-            label="last Name"
-            name="lastName"
-          />
+          <TextField inputRef={lastNameRef} label="last Name" name="lastName" />
           <TextField inputRef={emailRef} label="Email" name="email" />
           <TextField
             inputRef={passwordRef}
@@ -107,7 +103,7 @@ const RegisterPage = () => {
           <Button onClick={onSubmit} variant="contained">
             Register
           </Button>
-          {error && <Typography sx={{color: "red"}}>{error}</Typography>}
+          {error && <Typography sx={{ color: 'red' }}>{error}</Typography>}
         </Box>
       </Box>
     </Container>

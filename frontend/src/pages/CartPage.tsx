@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { BASE_URL } from '../constants/baseUrl';
 import { useAuth } from '../context/Auth/AuthContext';
 
+
 const CartPage = () => {
   const { token } = useAuth();
   const [cart, setCart] = useState();
@@ -16,22 +17,22 @@ const CartPage = () => {
     const fetchCart = async () => {
       const response = await fetch(`${BASE_URL}/cart`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (!response.ok) {
-        setError("Failed to fetch user cart. Please try again");
+        setError('Failed to fetch user cart. Please try again');
       }
 
       const data = await response.json();
       setCart(data);
-    }
+    };
 
     fetchCart();
   }, [token]);
 
-  console.log( cart );
+  console.log(cart);
 
   return (
     <Container sx={{ mt: 2 }}>
