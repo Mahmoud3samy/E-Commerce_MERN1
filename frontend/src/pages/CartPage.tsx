@@ -6,14 +6,17 @@ import { useCart } from '../context/Cart/CartContext';
 
 
 const CartPage = () => {
-  const { cartItems, totalAmount, updateItemInCart } = useCart();
+  const { cartItems, totalAmount, updateItemInCart, removeItemInCart } = useCart();
 
   const handleQuantity = (productId: string, quantity: number) => {
     if (quantity < 0) {
       return;
     }
     updateItemInCart(productId, quantity)
+  };
 
+  const handleRemoveItem = (productId: string) => {
+    removeItemInCart(productId);
   }
 
   return (
@@ -40,7 +43,7 @@ const CartPage = () => {
                 <Typography>
                   {item.quantity} x {item.unitPrice} EGP
                 </Typography>
-                <Button>Remove Item</Button>
+                <Button onClick={() => handleRemoveItem(item.productId)}>Remove Item</Button>
               </Box>
             </Box>
             <ButtonGroup variant="contained" aria-label="Basic button group">
